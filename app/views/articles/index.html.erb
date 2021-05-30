@@ -1,9 +1,11 @@
 
-<div>
-
+<div class="padding">
+  <%= link_to "New article", new_article_path %>
+  
   <!-- Render view/articles/_article.html.erb for each elements -->
   <%= render @articles %>
   
-  <%= link_to "New article", new_article_path %>
+  
+    
   
 </div>
