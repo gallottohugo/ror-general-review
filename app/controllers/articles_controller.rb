@@ -1,20 +1,43 @@
 class ArticlesController < ApplicationController
+
+  before_action :find_article, only: [:edit, :update, :destroy, :show]
   def new
     @article = Article.new
   end
 
   def create
-    @article = Article.create(title: params[:article][:title])
-    render json: @article
+    @article = Article.create(article_params)
+    redirect_to @article
   end
 
   def index 
     @articles = Article.all
-    render json: @articles
   end
 
   def show 
-    @article = Article.find(params[:id])
-    render json: @article
+  end
+
+  def edit
+  end
+
+  def update
+    @article .update(article_params)
+    redirect_to @article
+  end
+
+  def destroy
+    
+    @article.destroy
+    redirect_to articles_path
+  end
+
+  private
+
+  def find_article
+		@article = Article.find(params[:id])
+	end
+
+  def article_params
+    params.require(:article).permit(:title, :status)
   end
 end
