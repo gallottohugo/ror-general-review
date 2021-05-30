@@ -1,12 +1,15 @@
 class ArticlesController < ApplicationController
 
-  before_action :find_article, only: [:edit, :update, :destroy, :show]
+  before_action :find_article, only: [:edit, :update, :destroy, :show,]
+  before_action :find_user, only: [:from_author]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
   def new
     @article = Article.new
   end
 
   def create
-    @article = Article.create(article_params)
+    @article = current_user.articles.create(article_params)
     redirect_to @article
   end
 
@@ -21,17 +24,25 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article .update(article_params)
+    @article.update(article_params)
     redirect_to @article
   end
 
   def destroy
-    
     @article.destroy
     redirect_to articles_path
   end
 
+  def from_author
+    
+    @articles = current_user.articles
+  end
+
   private
+
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
   def find_article
 		@article = Article.find(params[:id])
