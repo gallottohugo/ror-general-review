@@ -1,11 +1,9 @@
 <br/>
 <div>
-  <ul>
-    <% for item in @articles %>
-      <li>
-        <%= link_to item.title, item %>
-      </li>
-    <% end %>
-  <ul>
+
+  <!-- Render view/articles/_article.html.erb for each elements -->
+  <%= render @articles %>
+  
   <%= link_to "New article", new_article_path %>
+  
 </div>
