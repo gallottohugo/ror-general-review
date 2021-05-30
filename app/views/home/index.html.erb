@@ -1,2 +1,7 @@
-<h1>Home#index</h1>
+
+<% if current_user %>
+  <h1>Home <%= current_user.email %></h1>
+<% else %>
+  <h1>Login to view details </h1>
+<% end %>
 <%= link_to 'Articles', articles_path %>
