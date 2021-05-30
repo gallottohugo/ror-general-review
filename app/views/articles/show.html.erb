@@ -2,7 +2,10 @@
 <!-- Render view/articles/_article.html.erb  -->
 <%= render @article %>
 
-<div class="padding">
-    <%= link_to "Editar",  edit_article_path, class: "btn btn-success"%>
-    <%= link_to "Eliminar", @article, method: :delete, class: "btn btn-danger" %>
-</div>
+
+<% if current_user == @article.user %>
+  <div class="padding">
+      <%= link_to "Editar",  edit_article_path, class: "btn btn-success"%>
+      <%= link_to "Eliminar", @article, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' }%>
+  </div>
+<% end %>
